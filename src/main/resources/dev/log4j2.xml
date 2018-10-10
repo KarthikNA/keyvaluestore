@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60" status="INFO">
+    <Properties>
+        <Property name="log-path">/opt/keyvaluestore/</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console-Appender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c %M %L - %msg%n
+                </pattern>>
+            </PatternLayout>
+        </Console>
+        <!--File pattern defines that File will be rolled after 1 day-->
+        <RollingFile name="App-File-Appender" fileName="${log-path}/key-value-store.log"
+                     filePattern="${log-path}/key-value-store-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c %M %L - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <!--Max Depth defines the number of sub-directories-->
+                <Delete basePath="${log-path}" maxDepth="2">
+                    <IfFileName glob="key-value-store-*.log.gz">
+                        <IfAny>
+                            <!--Once the file (*.log.gz) count reaches 30, then delete-->
+                            <IfAccumulatedFileCount exceeds="30"/>
+                        </IfAny>
+                    </IfFileName>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="SpringBoot-File-Appender" fileName="${log-path}/key-value-store.log"
+                     filePattern="${log-path}/key-value-store-spring-boot-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c %M %L - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <!--Max Depth defines the number of sub-directories-->
+                <Delete basePath="${log-path}" maxDepth="2">
+                    <IfFileName glob="key-value-store-spring-boot-*.log.gz">
+                        <IfAny>
+                            <!--Once the file (*.log.gz) count reaches 30, then delete-->
+                            <IfAccumulatedFileCount exceeds="30"/>
+                        </IfAny>
+                    </IfFileName>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c %M %L -
+                    %msg%n
+                </pattern>
+            </PatternLayout>
+        </Console>
+
+    </Appenders>
+    <Loggers>
+        <Logger name="com.assignment.keyvaluestore" level="debug" additivity="false">
+            <AppenderRef ref="App-File-Appender"/>
+            <appender-ref ref="STDOUT"/>
+        </Logger>
+        <Logger name="org.springframework.web" level="debug" additivity="false">
+            <AppenderRef ref="SpringBoot-File-Appender"/>
+            <AppenderRef ref="App-File-Appender"/>
+            <appender-ref ref="STDOUT"/>
+        </Logger>
+        <Logger name="org.hibernate.SQL" level="info" additivity="false">
+            <AppenderRef ref="App-File-Appender"/>
+            <appender-ref ref="STDOUT"/>
+        </Logger>
+        <Root>
+            <AppenderRef ref="App-File-Appender"/>
+        </Root>
+    </Loggers>
+</Configuration>
