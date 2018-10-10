@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.assignment</groupId>
+    <artifactId>keyvaluestore</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>keyvaluestore</name>
+    <description>disk backed key value store</description>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <!--<version>2.0.1.RELEASE</version>-->
+        <version>1.5.12.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <hikari-cp.version>2.4.7</hikari-cp.version>
+        <project.warName>keyvaluestoreapi</project.warName>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>spring-repo</id>
+            <name>Spring Repository</name>
+            <url>http://repo.spring.io/libs-release-remote</url>
+        </repository>
+    </repositories>
+
+
+
+
+</project>
