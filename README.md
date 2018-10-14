@@ -5,7 +5,7 @@ This is a simple implementation using Redis as the disk backed memory.
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
   * Clone the project into your local machine via terminal using 
-    ```git clone https://github.com/KarthikNA/keyvaluestore.git```
+    * ```git clone https://github.com/KarthikNA/keyvaluestore.git```
   * Make sure redis is running on your system.
     * **NOTE : In this project redis is running on its default port and utilising the _Redis Bin 1_ for all operations** 
   * Run the following commands - 
