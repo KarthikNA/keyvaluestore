@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/status")
 public class StatusController {
 
+  /**
+   * used to the status check of the application.
+   * @return map of a string and appropriate state of the application.
+   */
   @RequestMapping(value = "", method = RequestMethod.GET)
   public ResponseEntity<Map<String, String>> statusController() {
     Map<String, String> response = new HashMap<>();
