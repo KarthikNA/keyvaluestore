@@ -4,6 +4,7 @@ import com.assignment.keyvaluestore.service.RedisService;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicInteger;
 import org.springframework.stereotype.Service;
@@ -142,5 +143,14 @@ public class RedisServiceImpl implements RedisService {
   public void deleteHash(String key) {
     redisTemplate.delete(key);
   }
+
+  @Override
+  public void flushDb() {
+    redisTemplate.execute((RedisCallback<Object>) connection -> {
+      connection.flushDb();
+      return null;
+    });
+  }
+
 
 }

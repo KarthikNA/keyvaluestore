@@ -60,21 +60,21 @@ public class RedisDataStoreImpl implements DataStore {
     // if the key is present in the disc backed storage, update the key in the disk backed storage.
     KeyValueDto redisStore = getFromRedis(dto.getKey());
     if (redisStore != null) {
-      log.info("key : '{}' value : '{}' was Stored in Redis(Disk) Storage and value updated "
+      log.info("key : '{}' and value : '{}' was Stored in Redis(Disk) Storage and value updated "
           + "to : '{}'", dto.getKey(), redisStore.getValue(), dto.getValue());
       storeInRedis(dto.getKey(), dto.getValue());
       return;
     }
     // if the local memory is full, store the key value pair in the disc backed storage.
-    if (keyValueStoreMap.size() >= maxCacheSize) {
+    if (this.keyValueStoreMap.size() >= maxCacheSize) {
       // store all data in the local storage in the disc storage and free the local storage.
       log.info("Local Storage is Full");
-      keyValueStoreMap.forEach((k, v) -> storeInRedis(v.getKey(), v.getValue()));
+      this.keyValueStoreMap.forEach((k, v) -> storeInRedis(v.getKey(), v.getValue()));
       log.info("Clearing Local Storage to Store New key-value pairs");
-      keyValueStoreMap.clear();
+      this.keyValueStoreMap.clear();
     }
     // store the new data in the local storage.
-    log.info("key : '{}' value : '{}' Stored in Local Storage", dto.getKey(), dto.getValue());
+    log.info("key : '{}' and value : '{}' Stored in Local Storage", dto.getKey(), dto.getValue());
     this.keyValueStoreMap.put(dto.getKey(), dto);
   }
 
@@ -99,8 +99,16 @@ public class RedisDataStoreImpl implements DataStore {
    * @param value value to be stored with the key.
    */
   private void storeInRedis(String key, String value) {
-    log.info("Storing key : '{}' value : '{}' in Redis", key, value);
+    log.info("Storing key : '{}' and value : '{}' in Redis", key, value);
     redis.insertValueWithoutExpiry(key, value);
+  }
+
+  /**
+   * clear the local storage. needed for testing purpose.
+   */
+  @Override
+  public void clearLocalStorage() {
+    this.keyValueStoreMap.clear();
   }
 
 }
