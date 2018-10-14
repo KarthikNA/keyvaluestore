@@ -40,6 +40,17 @@ If you do not have a REST client like Postman, the following cURL commands can b
     *  `curl -X POST \
           http://127.0.0.1:1732/key-value-store/run-tests`                      
 
+## Basic Design
+* Get Value from Key
+    * If the key is present in local storage return the corresponding value associated with the key.. 
+    * Else check for the key in the disk storage.
+        * If the key is in disk storage, return the corresponding value associated with the key. 
+        * Else throw exception.
+* Insert a Key-Value pair
+    * If the key already present in the local storage, update the same.
+    * Else If the key present in the disk storage, update the same.
+    * Else If the local storage is full, store the data in local storage and inser the new key value pair in the local storage.   
+
 ## Assumptions
 * This is a simple implementation of the Disk Backed Key Value Store in Java.
 * This SpringBoot application is designed to run on port **1732** by default.
