@@ -12,6 +12,8 @@ public interface RedisService {
 
   void insertValue(String key, Object value, Long expiry, TimeUnit timeUnit);
 
+  void insertValueWithoutExpiry(String key, Object value);
+
   Object getValue(String key);
 
   void deleteValue(String key);

@@ -6,7 +6,9 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicInteger;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RedisServiceImpl implements RedisService {
 
   @Autowired
@@ -72,6 +74,16 @@ public class RedisServiceImpl implements RedisService {
     if (expiry != null) {
       redisTemplate.expire(key, expiry, timeUnit);
     }
+  }
+
+  /**
+   * insert redis key .
+   * @param key      .
+   * @param value    .
+   */
+  @Override
+  public void insertValueWithoutExpiry(String key, Object value) {
+    redisTemplate.opsForValue().set(key, value);
   }
 
   /**
