@@ -3,8 +3,6 @@ package com.assignment.keyvaluestore.controller;
 import com.assignment.keyvaluestore.dto.KeyValueDto;
 import com.assignment.keyvaluestore.dto.ResponseDto;
 import com.assignment.keyvaluestore.service.KeyValueService;
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

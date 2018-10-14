@@ -6,8 +6,6 @@ import com.assignment.keyvaluestore.service.KeyValueService;
 import com.assignment.keyvaluestore.service.RedisService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
