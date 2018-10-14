@@ -14,12 +14,16 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 @ComponentScan
 public class RedisConfig {
+
   @Value("${redis.hostname}")
   private String hostName;
+
   @Value("${redis.port}")
   private Integer port;
+
   @Value("${redis.database}")
   private Integer dbCompartment;
+
   @Value("${redis.password}")
   private String password;
 

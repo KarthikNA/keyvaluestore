@@ -19,7 +19,7 @@ public class KeyValueController {
     return new ResponseEntity(response, HttpStatus.OK);
   }
 
-  @RequestMapping(value = "/key/{key}", method = RequestMethod.GET)
+  @RequestMapping(value = "/key/{key}", method = RequestMethod.PUT)
   public ResponseEntity<Map<String, String>> putValue() {
     Map<String, String> response = new HashMap<>();
     // todo - update key if already exists, else insert newly
