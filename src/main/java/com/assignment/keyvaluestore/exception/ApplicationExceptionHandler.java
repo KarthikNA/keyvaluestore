@@ -22,9 +22,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
       ValidationException ex) {
     logger.error("Validation exception occurred due to cause : " + ex.getCause()
         + "\n Message : " + ex.getMessage());
-    ErrorDetail errorDetail = //new ErrorDetail(ex.getCause().getMessage(), ex.getMessage());
-    new ErrorDetail(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST.getReasonPhrase(),
-        ex.getMessage());
+    ErrorDetail errorDetail = new ErrorDetail(ex.getCause().getMessage(),
+        HttpStatus.BAD_REQUEST.getReasonPhrase(), ex.getMessage());
     return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
   }
 
@@ -36,13 +35,12 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(value = NotFoundException.class)
   public ResponseEntity<ErrorDetail> handleNotFoundException(
-      ValidationException ex) {
+      NotFoundException ex) {
     logger.error("Resource Not Found exception occurred due to cause : " + ex.getCause()
         + "\n Message : " + ex.getMessage());
-    ErrorDetail errorDetail = //new ErrorDetail(ex.getCause().getMessage(), ex.getMessage());
-        new ErrorDetail(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST.getReasonPhrase(),
-            ex.getMessage());
-    return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
+    ErrorDetail errorDetail = new ErrorDetail(ex.getCause().getMessage(),
+        HttpStatus.NOT_FOUND.getReasonPhrase(), ex.getMessage());
+    return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);
   }
 
   /**

@@ -4,7 +4,7 @@ public class ErrorDetail {
 
   private String errorSubCode;
   private String errorDescription;
-  private String message;
+  private String errorMessage;
 
   /**
    * @param errorSubCode     .
@@ -17,15 +17,15 @@ public class ErrorDetail {
   }
 
   /**
-   * error detail with ui message.
+   * error detail with ui errorMessage.
    * @param errorSubCode     .
    * @param errorDescription .
-   * @param message          .
+   * @param errorMessage          .
    */
-  public ErrorDetail(String errorSubCode, String errorDescription, String message) {
+  public ErrorDetail(String errorSubCode, String errorDescription, String errorMessage) {
     this.errorSubCode = errorSubCode;
     this.errorDescription = errorDescription;
-    this.message = message;
+    this.errorMessage = errorMessage;
   }
 
   public String getErrorSubCode() {
@@ -44,12 +44,12 @@ public class ErrorDetail {
     this.errorDescription = errorDescription;
   }
 
-  public String getMessage() {
-    return message;
+  public String getErrorMessage() {
+    return errorMessage;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public void setErrorMessage(String errorMessage) {
+    this.errorMessage = errorMessage;
   }
 
 }
