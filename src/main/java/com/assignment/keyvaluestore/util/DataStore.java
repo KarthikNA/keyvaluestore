@@ -8,4 +8,6 @@ public interface DataStore {
   KeyValueDto getValue(String key);
 
   void insertKeyValue(KeyValueDto dto);
+
+  void clearLocalStorage();
 }

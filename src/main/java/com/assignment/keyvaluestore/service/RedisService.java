@@ -29,4 +29,6 @@ public interface RedisService {
   List<Object> getValuesFromHash(String key);
 
   void deleteHash(String key);
+
+  void flushDb();
 }

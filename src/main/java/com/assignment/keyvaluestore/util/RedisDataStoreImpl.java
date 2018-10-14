@@ -66,12 +66,12 @@ public class RedisDataStoreImpl implements DataStore {
       return;
     }
     // if the local memory is full, store the key value pair in the disc backed storage.
-    if (keyValueStoreMap.size() >= maxCacheSize) {
+    if (this.keyValueStoreMap.size() >= maxCacheSize) {
       // store all data in the local storage in the disc storage and free the local storage.
       log.info("Local Storage is Full");
-      keyValueStoreMap.forEach((k, v) -> storeInRedis(v.getKey(), v.getValue()));
+      this.keyValueStoreMap.forEach((k, v) -> storeInRedis(v.getKey(), v.getValue()));
       log.info("Clearing Local Storage to Store New key-value pairs");
-      keyValueStoreMap.clear();
+      this.keyValueStoreMap.clear();
     }
     // store the new data in the local storage.
     log.info("key : '{}' and value : '{}' Stored in Local Storage", dto.getKey(), dto.getValue());
@@ -101,6 +101,14 @@ public class RedisDataStoreImpl implements DataStore {
   private void storeInRedis(String key, String value) {
     log.info("Storing key : '{}' and value : '{}' in Redis", key, value);
     redis.insertValueWithoutExpiry(key, value);
+  }
+
+  /**
+   * clear the local storage. needed for testing purpose.
+   */
+  @Override
+  public void clearLocalStorage() {
+    this.keyValueStoreMap.clear();
   }
 
 }
