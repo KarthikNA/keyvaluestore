@@ -1,6 +1,7 @@
 package com.assignment.keyvaluestore.controller;
 
 import com.assignment.keyvaluestore.dto.KeyValueDto;
+import com.assignment.keyvaluestore.dto.ResponseDto;
 import com.assignment.keyvaluestore.service.KeyValueService;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,10 +30,8 @@ public class KeyValueController {
   }
 
   @RequestMapping(value = "/key", method = RequestMethod.PUT)
-  public ResponseEntity<Map<String, String>> putValue(@RequestBody KeyValueDto dto) {
-    Map<String, String> response = new HashMap<>();
-    service.storeValue(dto);
-    // todo - update key if already exists, else insert newly
+  public ResponseEntity<ResponseDto> putValue(@RequestBody KeyValueDto dto) {
+    ResponseDto response = service.storeValue(dto);
     return new ResponseEntity(response, HttpStatus.OK);
   }
 }

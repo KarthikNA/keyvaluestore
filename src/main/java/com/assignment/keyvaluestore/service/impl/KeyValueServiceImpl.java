@@ -1,6 +1,7 @@
 package com.assignment.keyvaluestore.service.impl;
 
 import com.assignment.keyvaluestore.dto.KeyValueDto;
+import com.assignment.keyvaluestore.dto.ResponseDto;
 import com.assignment.keyvaluestore.service.KeyValueService;
 import com.assignment.keyvaluestore.service.RedisService;
 import com.google.gson.Gson;
@@ -21,10 +22,10 @@ public class KeyValueServiceImpl implements KeyValueService {
   private RedisService redis;
 
   @Override
-  public void storeValue(KeyValueDto dto) {
+  public ResponseDto storeValue(KeyValueDto dto) {
     log.info("Request received to store or update with key : {} and value : {}",
         dto.getKey(), dto.getValue());
     redis.insertValueWithoutExpiry(dto.getKey(), dto.getValue());
-    log.info("insertion done");
+    return new ResponseDto("Data Successfully Stored");
   }
 }
