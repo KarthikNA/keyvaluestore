@@ -23,9 +23,8 @@ public class KeyValueController {
   private KeyValueService service;
 
   @RequestMapping(value = "/key/{key}", method = RequestMethod.GET)
-  public ResponseEntity<Map<String, String>> getValue(@PathVariable(name = "key") String key) {
-    Map<String, String> response = new HashMap<>();
-    // todo - get data corresponding to key
+  public ResponseEntity<KeyValueDto> getValue(@PathVariable(name = "key") String key) {
+    KeyValueDto response = service.getValue(key);
     return new ResponseEntity(response, HttpStatus.OK);
   }
 

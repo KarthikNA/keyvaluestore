@@ -6,6 +6,8 @@ import com.assignment.keyvaluestore.service.KeyValueService;
 import com.assignment.keyvaluestore.service.RedisService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,17 @@ public class KeyValueServiceImpl implements KeyValueService {
 
   @Autowired
   private RedisService redis;
+
+  @Override
+  public KeyValueDto getValue(String key) {
+    log.info("Request received to get value for the key : {}", key);
+    Object obj = redis.getValue(key);
+    //Type type = new TypeToken<String>() {}.getType();
+    String value = obj.toString();
+    //return gson.fromJson(value, type);
+    return new KeyValueDto(key, value);
+  }
+
 
   @Override
   public ResponseDto storeValue(KeyValueDto dto) {
