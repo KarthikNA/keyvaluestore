@@ -20,12 +20,22 @@ public class KeyValueController {
   @Autowired
   private KeyValueService service;
 
+  /**
+   * get a the value corresponding to the key.
+   * @param key .
+   * @return KeyValueDto comprising of key and value.
+   */
   @RequestMapping(value = "/key/{key}", method = RequestMethod.GET)
   public ResponseEntity<KeyValueDto> getValue(@PathVariable(name = "key") String key) {
     KeyValueDto response = service.getValue(key);
     return new ResponseEntity(response, HttpStatus.OK);
   }
 
+  /**
+   * insert a key value pair into the data store.
+   * @param dto KeyValueDto.
+   * @return ResponseDto indicating the success or failure of the operation.
+   */
   @RequestMapping(value = "/key", method = RequestMethod.PUT)
   public ResponseEntity<ResponseDto> putValue(@RequestBody KeyValueDto dto) {
     ResponseDto response = service.storeValue(dto);
