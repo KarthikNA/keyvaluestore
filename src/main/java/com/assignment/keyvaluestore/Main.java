@@ -10,7 +10,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 public class Main extends SpringBootServletInitializer {
 
   public static void main(String[] args) throws Exception {
-    System.out.println("Key Value Store UP & RUNNING");
     SpringApplication.run(Main.class, args);
   }
 }
